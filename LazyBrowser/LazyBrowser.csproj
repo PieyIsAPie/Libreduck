@@ -71,6 +71,7 @@
     <Compile Include="Config\ConfigWindow.Designer.cs">
       <DependentUpon>ConfigWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions\ControlExtension.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

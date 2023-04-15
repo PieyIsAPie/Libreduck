@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using LazyBrowser.Extensions;
+
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LazyBrowser
@@ -36,6 +38,10 @@ namespace LazyBrowser
                 reloadButton.Text = "r";
             }
         }
+        private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
+        {
+            this.InvokeOnUiThreadIfRequired(() => UpdateStates());
+        }
         public void Initialize()
         {
             CefSettings settings = new CefSettings();
@@ -47,13 +53,21 @@ namespace LazyBrowser
             this.CefPanel.Controls.Add(chromeBrowser);
             UpdateStates();
             baseWinPanel.Dock = DockStyle.Fill;
-            //addressBar.Dock = DockStyle.Fill;            CefPanel.Dock = DockStyle.Fill;
+            //addressBar.Dock = DockStyle.Fill;
+            CefPanel.Dock = DockStyle.Fill;
             // Unhandled exceptions for our Application Domain
             AppDomain.CurrentDomain.UnhandledException += new System.UnhandledExceptionEventHandler(CrashHandler);
             // Unhandled exceptions for the executing UI thread
             Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(CrashHandler);
             UpdateStates();
+            chromeBrowser.AddressChanged += OnBrowserAddressChanged;
+            chromeBrowser.LoadingStateChanged += OnLoadingStateChanged;
         }
+        private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs e)
+        {
+            this.InvokeOnUiThreadIfRequired(() => addressBar.Text = e.Address);
+        }
+
         public Main()
         {
             InitializeComponent();
@@ -104,5 +118,18 @@ namespace LazyBrowser
             // Clear all previously added MenuItems.
             exMenu.MenuItems.Clear();
         }
+
+        private void addressBar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                chromeBrowser.Load(addressBar.Text);
+            }
+        }
+        private void addressBar_Click(object sender, EventArgs e)
+        {
+            addressBar.SelectAll();
+        }
+
     }
 }
