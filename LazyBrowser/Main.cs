@@ -43,7 +43,8 @@ namespace LazyBrowser
             // Add it to the form and fill it to the form window.
             this.CefPanel.Controls.Add(chromeBrowser);
             UpdateStates();
-            //chromeBrowser.Dock = DockStyle.Fill;
+            baseWinPanel.Dock = DockStyle.Fill;
+            //addressBar.Dock = DockStyle.Fill;
             CefPanel.Dock = DockStyle.Fill;
             // Unhandled exceptions for our Application Domain
             AppDomain.CurrentDomain.UnhandledException += new System.UnhandledExceptionEventHandler(CrashHandler);
