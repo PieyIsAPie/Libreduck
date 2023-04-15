@@ -35,6 +35,7 @@
             this.addressBar = new System.Windows.Forms.TextBox();
             this.addressBarPanel = new System.Windows.Forms.Panel();
             this.baseWinPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.exButton = new System.Windows.Forms.Button();
             this.addressBarPanel.SuspendLayout();
             this.baseWinPanel.SuspendLayout();
             this.SuspendLayout();
@@ -84,11 +85,12 @@
             this.addressBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.addressBar.Location = new System.Drawing.Point(74, 3);
             this.addressBar.Name = "addressBar";
-            this.addressBar.Size = new System.Drawing.Size(603, 20);
+            this.addressBar.Size = new System.Drawing.Size(691, 20);
             this.addressBar.TabIndex = 3;
             // 
             // addressBarPanel
             // 
+            this.addressBarPanel.Controls.Add(this.exButton);
             this.addressBarPanel.Controls.Add(this.addressBar);
             this.addressBarPanel.Controls.Add(this.backButton);
             this.addressBarPanel.Controls.Add(this.forwardButton);
@@ -96,7 +98,7 @@
             this.addressBarPanel.Location = new System.Drawing.Point(2, 2);
             this.addressBarPanel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.addressBarPanel.Name = "addressBarPanel";
-            this.addressBarPanel.Size = new System.Drawing.Size(679, 32);
+            this.addressBarPanel.Size = new System.Drawing.Size(795, 32);
             this.addressBarPanel.TabIndex = 0;
             // 
             // baseWinPanel
@@ -113,6 +115,17 @@
             this.baseWinPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.32948F));
             this.baseWinPanel.Size = new System.Drawing.Size(800, 450);
             this.baseWinPanel.TabIndex = 0;
+            // 
+            // exButton
+            // 
+            this.exButton.Location = new System.Drawing.Point(768, 3);
+            this.exButton.Name = "exButton";
+            this.exButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.exButton.Size = new System.Drawing.Size(27, 23);
+            this.exButton.TabIndex = 4;
+            this.exButton.Text = "...";
+            this.exButton.UseVisualStyleBackColor = true;
+            this.exButton.Click += new System.EventHandler(this.exButton_Click);
             // 
             // Main
             // 
@@ -138,6 +151,7 @@
         private System.Windows.Forms.TextBox addressBar;
         private System.Windows.Forms.Panel addressBarPanel;
         private System.Windows.Forms.TableLayoutPanel baseWinPanel;
+        private System.Windows.Forms.Button exButton;
     }
 }
 

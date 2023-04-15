@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LazyBrowser
 {
@@ -17,6 +18,8 @@ namespace LazyBrowser
         public ChromiumWebBrowser chromeBrowser;
         public bool isIncognito;
         public string[] arguments = Environment.GetCommandLineArgs();
+        private ContextMenu exMenu = new ContextMenu();
+
         private void CrashHandler(object sender, EventArgs e)
         {
             Cef.Shutdown();
@@ -44,8 +47,7 @@ namespace LazyBrowser
             this.CefPanel.Controls.Add(chromeBrowser);
             UpdateStates();
             baseWinPanel.Dock = DockStyle.Fill;
-            //addressBar.Dock = DockStyle.Fill;
-            CefPanel.Dock = DockStyle.Fill;
+            //addressBar.Dock = DockStyle.Fill;            CefPanel.Dock = DockStyle.Fill;
             // Unhandled exceptions for our Application Domain
             AppDomain.CurrentDomain.UnhandledException += new System.UnhandledExceptionEventHandler(CrashHandler);
             // Unhandled exceptions for the executing UI thread
@@ -89,6 +91,18 @@ namespace LazyBrowser
             UpdateStates();
             chromeBrowser.Back();
             UpdateStates();
+        }
+
+        private void exButton_Click(object sender, EventArgs e)
+        {
+            // Define the MenuItem objects to display for the TextBox.
+            MenuItem menuItem1 = new MenuItem("&Copy");
+            MenuItem menuItem2 = new MenuItem("&Find and Replace");
+            // Define the MenuItem object to display for the PictureBox.
+            MenuItem menuItem3 = new MenuItem("C&hange Picture");
+
+            // Clear all previously added MenuItems.
+            exMenu.MenuItems.Clear();
         }
     }
 }
