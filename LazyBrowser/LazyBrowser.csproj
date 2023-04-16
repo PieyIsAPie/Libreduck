@@ -68,7 +68,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +75,7 @@
       <DependentUpon>ConfigWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Extensions\ControlExtension.cs" />
+    <Compile Include="Extensions\Tab.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LazyBrowser.Universal
 {
-    public class Class1
+    public class Config
     {
     }
 }

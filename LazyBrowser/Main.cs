@@ -101,27 +101,58 @@ namespace LazyBrowser
 
         private void exButton_Click(object sender, EventArgs e)
         {
-            // Define the MenuItem objects to display for the TextBox.
-            MenuItem menuItem1 = new MenuItem("&Copy");
-            MenuItem menuItem2 = new MenuItem("&Find and Replace");
-            // Define the MenuItem object to display for the PictureBox.
-            MenuItem menuItem3 = new MenuItem("C&hange Picture");
-
-            // Clear all previously added MenuItems.
-            exMenu.MenuItems.Clear();
+            ContextMenuStrip exMenu = new ContextMenuStrip();
+            ToolStripMenuItem settings = new ToolStripMenuItem();
+            ToolStripMenuItem devtools = new ToolStripMenuItem();
+            ToolStripMenuItem about = new ToolStripMenuItem();
+            exMenu.SuspendLayout();
+            settings.Name = "settings";
+            settings.Size = new System.Drawing.Size(152, 22);
+            settings.Text = "Settings";
+            settings.Click += new System.EventHandler(this.settings_Click);
+            devtools.Name = "devtools";
+            devtools.Size = new System.Drawing.Size(152, 22);
+            devtools.Text = "Show DevTools";
+            devtools.Click += new System.EventHandler(this.devtools_Click);
+            about.Name = "about";
+            about.Size = new System.Drawing.Size(152, 22);
+            about.Text = "About";
+            about.Click += new System.EventHandler(this.about_Click);
+            exMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            settings,
+            devtools,
+            about});
+            exMenu.Name = "exMenu";
+            exMenu.Size = new System.Drawing.Size(153, 70);
+            exMenu.ResumeLayout(false);
+            exButton.ContextMenuStrip = exMenu;
+            exMenu.Show(exButton, new System.Drawing.Point(0, exButton.Height));
         }
 
         private void addressBar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                chromeBrowser.Load(addressBar.Text);
+                chromeBrowser.LoadUrlAsync(addressBar.Text);
             }
         }
         private void addressBar_Click(object sender, EventArgs e)
         {
             addressBar.SelectAll();
         }
+        private void settings_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("coming soon");
+        }
 
+        private void devtools_Click(object sender, EventArgs e)
+        {
+            chromeBrowser.ShowDevTools();
+        }
+
+        private void about_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("coming soon");
+        }
     }
 }
