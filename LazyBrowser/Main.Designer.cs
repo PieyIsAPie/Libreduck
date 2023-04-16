@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.CefPanel = new System.Windows.Forms.Panel();
             this.forwardButton = new System.Windows.Forms.Button();
             this.reloadButton = new System.Windows.Forms.Button();
@@ -42,19 +43,17 @@
             // 
             // CefPanel
             // 
-            this.CefPanel.Location = new System.Drawing.Point(4, 41);
-            this.CefPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.CefPanel.Location = new System.Drawing.Point(3, 33);
             this.CefPanel.Name = "CefPanel";
-            this.CefPanel.Size = new System.Drawing.Size(1059, 498);
+            this.CefPanel.Size = new System.Drawing.Size(794, 405);
             this.CefPanel.TabIndex = 0;
             // 
             // forwardButton
             // 
             this.forwardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.forwardButton.Location = new System.Drawing.Point(41, 4);
-            this.forwardButton.Margin = new System.Windows.Forms.Padding(4);
+            this.forwardButton.Location = new System.Drawing.Point(31, 3);
             this.forwardButton.Name = "forwardButton";
-            this.forwardButton.Size = new System.Drawing.Size(29, 28);
+            this.forwardButton.Size = new System.Drawing.Size(22, 23);
             this.forwardButton.TabIndex = 0;
             this.forwardButton.Text = "▶";
             this.forwardButton.UseVisualStyleBackColor = true;
@@ -63,10 +62,9 @@
             // reloadButton
             // 
             this.reloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reloadButton.Location = new System.Drawing.Point(78, 4);
-            this.reloadButton.Margin = new System.Windows.Forms.Padding(4);
+            this.reloadButton.Location = new System.Drawing.Point(59, 3);
             this.reloadButton.Name = "reloadButton";
-            this.reloadButton.Size = new System.Drawing.Size(29, 28);
+            this.reloadButton.Size = new System.Drawing.Size(22, 23);
             this.reloadButton.TabIndex = 1;
             this.reloadButton.Text = "r";
             this.reloadButton.UseVisualStyleBackColor = true;
@@ -75,10 +73,9 @@
             // backButton
             // 
             this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backButton.Location = new System.Drawing.Point(4, 4);
-            this.backButton.Margin = new System.Windows.Forms.Padding(4);
+            this.backButton.Location = new System.Drawing.Point(3, 3);
             this.backButton.Name = "backButton";
-            this.backButton.Size = new System.Drawing.Size(29, 28);
+            this.backButton.Size = new System.Drawing.Size(22, 23);
             this.backButton.TabIndex = 2;
             this.backButton.Text = "◀";
             this.backButton.UseVisualStyleBackColor = true;
@@ -89,10 +86,9 @@
             this.addressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.addressBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.addressBar.Location = new System.Drawing.Point(115, 4);
-            this.addressBar.Margin = new System.Windows.Forms.Padding(4);
+            this.addressBar.Location = new System.Drawing.Point(87, 3);
             this.addressBar.Name = "addressBar";
-            this.addressBar.Size = new System.Drawing.Size(906, 22);
+            this.addressBar.Size = new System.Drawing.Size(678, 20);
             this.addressBar.TabIndex = 3;
             this.addressBar.Click += new System.EventHandler(this.addressBar_Click);
             this.addressBar.KeyDown += new System.Windows.Forms.KeyEventHandler(this.addressBar_KeyDown);
@@ -100,11 +96,11 @@
             // addressBarPanel
             // 
             this.addressBarPanel.ColumnCount = 5;
-            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37F));
-            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 28F));
             this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.addressBarPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.addressBarPanel.Controls.Add(this.backButton, 0, 0);
             this.addressBarPanel.Controls.Add(this.forwardButton, 1, 0);
             this.addressBarPanel.Controls.Add(this.reloadButton, 2, 0);
@@ -116,7 +112,7 @@
             this.addressBarPanel.Name = "addressBarPanel";
             this.addressBarPanel.RowCount = 1;
             this.addressBarPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.addressBarPanel.Size = new System.Drawing.Size(1067, 37);
+            this.addressBarPanel.Size = new System.Drawing.Size(800, 30);
             this.addressBarPanel.TabIndex = 0;
             // 
             // exButton
@@ -124,11 +120,10 @@
             this.exButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.exButton.Location = new System.Drawing.Point(1029, 4);
-            this.exButton.Margin = new System.Windows.Forms.Padding(4);
+            this.exButton.Location = new System.Drawing.Point(771, 3);
             this.exButton.Name = "exButton";
             this.exButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.exButton.Size = new System.Drawing.Size(34, 29);
+            this.exButton.Size = new System.Drawing.Size(26, 24);
             this.exButton.TabIndex = 4;
             this.exButton.Text = "...";
             this.exButton.UseVisualStyleBackColor = true;
@@ -145,20 +140,20 @@
             this.baseWinPanel.Margin = new System.Windows.Forms.Padding(0);
             this.baseWinPanel.Name = "baseWinPanel";
             this.baseWinPanel.RowCount = 2;
-            this.baseWinPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.baseWinPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.baseWinPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.baseWinPanel.Size = new System.Drawing.Size(1067, 554);
+            this.baseWinPanel.Size = new System.Drawing.Size(800, 450);
             this.baseWinPanel.TabIndex = 0;
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.baseWinPanel);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "Form1";
+            this.Text = "LazyBrowser";
             this.addressBarPanel.ResumeLayout(false);
             this.addressBarPanel.PerformLayout();
             this.baseWinPanel.ResumeLayout(false);

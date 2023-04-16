@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using LazyBrowser.Extensions;
-
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace LazyBrowser
 {
@@ -48,17 +40,17 @@ namespace LazyBrowser
             // Initialize cef with the provided settings
             Cef.Initialize(settings);
             // Create a browser component
-            chromeBrowser = new ChromiumWebBrowser("http://ourcodeworld.com");
+            chromeBrowser = new ChromiumWebBrowser("http://duckduckgo.com");
             // Add it to the form and fill it to the form window.
-            this.CefPanel.Controls.Add(chromeBrowser);
+            CefPanel.Controls.Add(chromeBrowser);
             UpdateStates();
             baseWinPanel.Dock = DockStyle.Fill;
             //addressBar.Dock = DockStyle.Fill;
             CefPanel.Dock = DockStyle.Fill;
             // Unhandled exceptions for our Application Domain
-            AppDomain.CurrentDomain.UnhandledException += new System.UnhandledExceptionEventHandler(CrashHandler);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CrashHandler);
             // Unhandled exceptions for the executing UI thread
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(CrashHandler);
+            Application.ThreadException += new ThreadExceptionEventHandler(CrashHandler);
             UpdateStates();
             chromeBrowser.AddressChanged += OnBrowserAddressChanged;
             chromeBrowser.LoadingStateChanged += OnLoadingStateChanged;
