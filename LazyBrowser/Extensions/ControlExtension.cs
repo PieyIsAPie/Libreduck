@@ -1,5 +1,4 @@
-﻿//test
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System;
 
 namespace LazyBrowser.Extensions
