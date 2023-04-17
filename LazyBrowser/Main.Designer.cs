@@ -1,6 +1,4 @@
-﻿using LazyBrowser.UI;
-
-namespace LazyBrowser
+﻿namespace LazyBrowser
 {
     partial class Main
     {
@@ -39,17 +37,6 @@ namespace LazyBrowser
             this.addressBarPanel = new System.Windows.Forms.TableLayoutPanel();
             this.exButton = new System.Windows.Forms.Button();
             this.baseWinPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.tabsControl = new TabsWidget();
-            this.tabsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabsControl.SelectedIndexChanged += TabsControl_SelectedIndexChanged;
-            this.newTabButton = new System.Windows.Forms.Button();
-            this.newTabButton.Text = "+";
-            this.newTabButton.Size = new System.Drawing.Size(30, 30);
-            this.newTabButton.Location = new System.Drawing.Point(this.addressBarPanel.Width - this.newTabButton.Width - 10, 5);
-            this.newTabButton.Click += newTabButton_Click;
-            this.addressBarPanel.Controls.Add(newTabButton);
-
-            this.CefPanel.Controls.Add(this.tabsControl);
             this.addressBarPanel.SuspendLayout();
             this.baseWinPanel.SuspendLayout();
             this.SuspendLayout();
@@ -184,8 +171,6 @@ namespace LazyBrowser
         private System.Windows.Forms.TableLayoutPanel addressBarPanel;
         private System.Windows.Forms.TableLayoutPanel baseWinPanel;
         private System.Windows.Forms.Button exButton;
-        private TabsWidget tabsControl;
-        private System.Windows.Forms.Button newTabButton;
 
 
     }

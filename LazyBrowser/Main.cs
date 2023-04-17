@@ -4,8 +4,6 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using LazyBrowser.Extensions;
-using LazyBrowser.UI;
-
 namespace LazyBrowser
 {
     public partial class Main : Form
@@ -14,24 +12,10 @@ namespace LazyBrowser
         public bool isIncognito;
         public string[] arguments = Environment.GetCommandLineArgs();
         private ContextMenu exMenu = new ContextMenu();
-        private TabsWidget tabs;
 
         private void CrashHandler(object sender, EventArgs e)
         {
             Cef.Shutdown();
-        }
-        private void TabsControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Implement logic for handling selected tab changes
-        }
-
-        private void newTabButton_Click(object sender, EventArgs e)
-        {
-            TabPage tab = new TabPage("New Tab");
-            // Add a new browser control to the tab
-            Tab tabObject = new Tab(addressBar, CefPanel); // Replace BrowserControl with the class of the browser control you are using.
-            this.tabsControl.TabPages.Add(tab);
-            this.tabsControl.SelectTab(tab);
         }
 
         private void UpdateStates()
@@ -70,23 +54,6 @@ namespace LazyBrowser
             UpdateStates();
             chromeBrowser.AddressChanged += OnBrowserAddressChanged;
             chromeBrowser.LoadingStateChanged += OnLoadingStateChanged;
-            TabsWidget tabsWidget = new TabsWidget();
-            tabsWidget.Dock = DockStyle.Fill;
-            this.Controls.Add(tabsWidget);
-            this.tabs = new TabsWidget();
-            this.tabs.Dock = DockStyle.Fill;
-
-            // Create a panel to contain the TabsWidget and the other controls
-            Panel panel = new Panel();
-            panel.Dock = DockStyle.Fill;
-            this.Controls.Add(panel);
-            panel.Controls.Add(this.tabs);
-
-            // Add the other controls to the same panel
-            panel.Controls.Add(this.forwardButton);
-            panel.Controls.Add(this.reloadButton);
-            panel.Controls.Add(this.backButton);
-            panel.Controls.Add(this.addressBarPanel);
         }
         private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs e)
         {
