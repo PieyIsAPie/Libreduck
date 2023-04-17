@@ -4,19 +4,14 @@ using System.Windows.Forms;
 
 namespace LazyBrowser.UI
 {
-    internal class TabsWidget : TabControl
+    public class TabsWidget : TabControl
     {
         private Button newTabButton;
+        
+
         public TabsWidget()
         {
-            // Set the DrawMode property to OwnerDrawFixed to enable drawing of the tabs
             this.DrawMode = TabDrawMode.OwnerDrawFixed;
-            newTabButton = new Button();
-            newTabButton.Text = "New Tab";
-            newTabButton.Size = new System.Drawing.Size(75, 23);
-            newTabButton.Location = new System.Drawing.Point(this.Right - newTabButton.Width - 5, this.Top + 3);
-            newTabButton.Click += NewTabButton_Click;
-            this.Controls.Add(newTabButton);
         }
 
         protected override void OnDrawItem(DrawItemEventArgs e)
@@ -42,12 +37,6 @@ namespace LazyBrowser.UI
                     break;
                 }
             }
-        }
-        private void NewTabButton_Click(object sender, EventArgs e)
-        {
-            // Add a new Tab to the TabControl when the button is clicked
-            this.TabPages.Add(new TabPage("New Tab"));
-            this.SelectedIndex = this.TabPages.Count - 1;
         }
     }
 }
