@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using LazyBrowser.Extensions;
+
 namespace LazyBrowser
 {
     public partial class Main : Form
