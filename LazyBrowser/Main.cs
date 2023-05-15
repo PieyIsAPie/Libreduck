@@ -25,10 +25,10 @@ namespace LazyBrowser
             forwardButton.Enabled = chromeBrowser.CanGoForward;
             if (chromeBrowser.IsLoading)
             {
-                reloadButton.Text = "x";
+                reloadButton.Image = global::LazyBrowser.Properties.Resources.CloseTab;
             } else if (!chromeBrowser.IsLoading)
             {
-                reloadButton.Text = "r";
+                reloadButton.Image = global::LazyBrowser.Properties.Resources.Reload;
             }
         }
         private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)

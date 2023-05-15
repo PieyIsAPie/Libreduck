@@ -51,33 +51,33 @@
             // forwardButton
             // 
             this.forwardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.forwardButton.Image = global::LazyBrowser.Properties.Resources.RightArrow;
             this.forwardButton.Location = new System.Drawing.Point(31, 3);
             this.forwardButton.Name = "forwardButton";
             this.forwardButton.Size = new System.Drawing.Size(22, 23);
             this.forwardButton.TabIndex = 0;
-            this.forwardButton.Text = "▶";
             this.forwardButton.UseVisualStyleBackColor = true;
             this.forwardButton.Click += new System.EventHandler(this.forwardButton_Click);
             // 
             // reloadButton
             // 
             this.reloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reloadButton.Image = global::LazyBrowser.Properties.Resources.Reload;
             this.reloadButton.Location = new System.Drawing.Point(59, 3);
             this.reloadButton.Name = "reloadButton";
             this.reloadButton.Size = new System.Drawing.Size(22, 23);
             this.reloadButton.TabIndex = 1;
-            this.reloadButton.Text = "r";
             this.reloadButton.UseVisualStyleBackColor = true;
             this.reloadButton.Click += new System.EventHandler(this.reloadButton_Click);
             // 
             // backButton
             // 
             this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backButton.Image = global::LazyBrowser.Properties.Resources.LeftArrow;
             this.backButton.Location = new System.Drawing.Point(3, 3);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(22, 23);
             this.backButton.TabIndex = 2;
-            this.backButton.Text = "◀";
             this.backButton.UseVisualStyleBackColor = true;
             this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
