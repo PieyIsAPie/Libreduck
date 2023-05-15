@@ -1,6 +1,6 @@
 # LazyBrowser
 
-**NOTE:** LazyBrowser has no releases yet. You must build from source to use.
+**NOTE:** LazyBrowser has a basic prebuilt release. For fresh off-the-vine LazyBrowser, build it yourself.
 
 An extremely garbage (and CEF-based) web browser
 
