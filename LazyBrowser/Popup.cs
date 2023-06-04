@@ -14,10 +14,11 @@ namespace LazyBrowser
 {
     public partial class Popup : Form
     {
+        public Global globals = new Global();
         public Popup(string url)
         {
             InitializeComponent();
-            Cef.Initialize(settings);
+            Cef.Initialize(globals.settings);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LazyBrowser
 {
-    internal class Global
+    public class Global
     {
         public CefSettings settings = new CefSettings();
 

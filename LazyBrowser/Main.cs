@@ -13,6 +13,7 @@ namespace LazyBrowser
         public bool isIncognito;
         public string[] arguments = Environment.GetCommandLineArgs();
         private ContextMenu exMenu = new ContextMenu();
+        public Global globals = new Global();
 
         private void CrashHandler(object sender, EventArgs e)
         {
@@ -37,9 +38,8 @@ namespace LazyBrowser
         }
         public void Initialize()
         {
-            CefSettings settings = new CefSettings();
             // Initialize cef with the provided settings
-            Cef.Initialize(settings);
+            Cef.Initialize(globals.settings);
             // Create a browser component
             chromeBrowser = new ChromiumWebBrowser("http://duckduckgo.com");
             // Add it to the form and fill it to the form window.
