@@ -20,5 +20,10 @@ namespace LazyBrowser
             InitializeComponent();
             Cef.Initialize(globals.settings);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

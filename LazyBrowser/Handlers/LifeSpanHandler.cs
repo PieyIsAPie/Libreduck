@@ -1,27 +1,31 @@
 ﻿using CefSharp;
+using CefSharp.WinForms;
+using System;
+using LazyBrowser;
 
 namespace LazyBrowser.Handlers
 {
-    internal class LifeSpanHandler : ILifeSpanHandler
+    public class LifeSpanHandler : ILifeSpanHandler
     {
-        public bool DoClose(IWebBrowser chromiumWebBrowser, IBrowser browser)
+        bool ILifeSpanHandler.OnBeforePopup(IWebBrowser browserControl,
+             IBrowser browser, IFrame frame, string targetUrl,
+             string targetFrameName, WindowOpenDisposition targetDisposition,
+             bool userGesture, IPopupFeatures popupFeatures, IWindowInfo windowInfo,
+             IBrowserSettings browserSettings, ref bool noJavascriptAccess,
+             out IWebBrowser newBrowser)
         {
-            throw new System.NotImplementedException();
+            //stop open popup
+            Popup popup = new Popup(targetUrl);
+            popup.Show();
+            newBrowser = null;
+            return true;
         }
 
-        public void OnAfterCreated(IWebBrowser chromiumWebBrowser, IBrowser browser)
-        {
-            throw new System.NotImplementedException();
-        }
+        bool ILifeSpanHandler.DoClose(IWebBrowser browserControl, IBrowser browser)
+        { return false; }
 
-        public void OnBeforeClose(IWebBrowser chromiumWebBrowser, IBrowser browser)
-        {
-            throw new System.NotImplementedException();
-        }
+        void ILifeSpanHandler.OnBeforeClose(IWebBrowser browserControl, IBrowser browser) { }
 
-        public bool OnBeforePopup(IWebBrowser chromiumWebBrowser, IBrowser browser, IFrame frame, string targetUrl, string targetFrameName, WindowOpenDisposition targetDisposition, bool userGesture, IPopupFeatures popupFeatures, IWindowInfo windowInfo, IBrowserSettings browserSettings, ref bool noJavascriptAccess, out IWebBrowser newBrowser)
-        {
-            throw new System.NotImplementedException();
-        }
+        void ILifeSpanHandler.OnAfterCreated(IWebBrowser browserControl, IBrowser browser) { }
     }
 }

@@ -1,64 +1,120 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
 using LazyBrowser.Extensions;
 
+
 namespace LazyBrowser
 {
     public partial class Main : Form
     {
-        public ChromiumWebBrowser chromeBrowser;
         public bool isIncognito;
         public string[] arguments = Environment.GetCommandLineArgs();
-        private ContextMenu exMenu = new ContextMenu();
         public Global globals = new Global();
+        private List<BrowserControl> browsers;
+        private TabControl tabControl;
+        private int nextTabIndex = 0;
 
         private void CrashHandler(object sender, EventArgs e)
         {
             Cef.Shutdown();
         }
-
-        private void UpdateStates()
-        {
-            backButton.Enabled = chromeBrowser.CanGoBack;
-            forwardButton.Enabled = chromeBrowser.CanGoForward;
-            if (chromeBrowser.IsLoading)
-            {
-                reloadButton.Image = global::LazyBrowser.Properties.Resources.CloseTab;
-            } else if (!chromeBrowser.IsLoading)
-            {
-                reloadButton.Image = global::LazyBrowser.Properties.Resources.Reload;
-            }
-        }
-        private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
-        {
-            this.InvokeOnUiThreadIfRequired(() => UpdateStates());
-        }
         public void Initialize()
         {
-            // Initialize cef with the provided settings
-            Cef.Initialize(globals.settings);
-            // Create a browser component
-            chromeBrowser = new ChromiumWebBrowser("http://duckduckgo.com");
-            // Add it to the form and fill it to the form window.
-            CefPanel.Controls.Add(chromeBrowser);
-            UpdateStates();
-            baseWinPanel.Dock = DockStyle.Fill;
-            //addressBar.Dock = DockStyle.Fill;
-            CefPanel.Dock = DockStyle.Fill;
+
+
+
             // Unhandled exceptions for our Application Domain
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CrashHandler);
+            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CrashHandler);
             // Unhandled exceptions for the executing UI thread
-            Application.ThreadException += new ThreadExceptionEventHandler(CrashHandler);
-            UpdateStates();
-            chromeBrowser.AddressChanged += OnBrowserAddressChanged;
-            chromeBrowser.LoadingStateChanged += OnLoadingStateChanged;
+            //Application.ThreadException += new ThreadExceptionEventHandler(CrashHandler);
+            this.Layout += Main_Layout;
+            InitializeTabControl();
         }
-        private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs e)
+        private void InitializeTabControl()
         {
-            this.InvokeOnUiThreadIfRequired(() => addressBar.Text = e.Address);
+            browsers = new List<BrowserControl>();
+            tabControl = new TabControl();
+            tabControl.Dock = DockStyle.Fill;
+            tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
+            tabControl.DrawMode = TabDrawMode.OwnerDrawFixed; // Enable custom-drawn tabs
+            tabControl.SizeMode = TabSizeMode.Fixed; // Set the TabSizeMode to Fixed
+            tabControl.Alignment = TabAlignment.Top;
+
+            // Attach the event handler for drawing the tabs
+            tabControl.DrawItem += TabControl_DrawItem;
+
+            // Create a Panel to hold the "New Tab" button
+            //Panel buttonPanel = new Panel();
+            //buttonPanel.Dock = DockStyle.Top;
+            //buttonPanel.Height = 30;
+            //buttonPanel.Controls.Add(newTabButton);
+
+            // Create a SplitContainer to hold both the tab control and the button panel
+            //SplitContainer splitContainer = new SplitContainer();
+            //splitContainer.Dock = DockStyle.Fill;
+            //splitContainer.Orientation = Orientation.Horizontal;
+            //splitContainer.Panel1.Controls.Add(tabControl);
+            //splitContainer.Panel2.Controls.Add(buttonPanel);
+
+            // Add the SplitContainer to the main form
+            //Controls.Add(splitContainer);
+
+            Controls.Add(tabControl);
+            tabControl.TabPages.Add(CreateNewTab());
+        }
+
+
+        private void TabControl_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            TabControl tabControl = (TabControl)sender;
+            TabPage tabPage = tabControl.TabPages[e.Index];
+
+            // Measure the size of the tab text
+            SizeF textSize = e.Graphics.MeasureString(tabPage.Text, e.Font);
+
+            // Calculate the horizontal position to center the text within the tab
+            float x = e.Bounds.Left + (e.Bounds.Width - textSize.Width) / 2;
+            float y = e.Bounds.Top + (e.Bounds.Height - textSize.Height) / 2;
+
+            e.Graphics.DrawString(tabPage.Text, e.Font, Brushes.Black, x, y);
+            e.DrawFocusRectangle();
+        }
+
+        private TabPage CreateNewTab()
+        {
+            TabPage tabPage = new TabPage($"Tab {nextTabIndex + 1}");
+            BrowserControl browser = new BrowserControl();
+            tabPage.Controls.Add(browser);
+            browser.Dock = DockStyle.Fill;
+            browsers.Add(browser);
+            nextTabIndex++;
+
+            // Update the position of the "New Tab" button whenever a new tab is created
+            UpdateNewTabButtonPosition();
+
+            return tabPage;
+        }
+
+        private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedIndex = tabControl.SelectedIndex;
+            if (selectedIndex >= 0 && selectedIndex < browsers.Count)
+            {
+                browsers[selectedIndex].Focus();
+            }
+        }
+        private void Main_Layout(object sender, LayoutEventArgs e)
+        {
+            UpdateNewTabButtonPosition();
+        }
+        private void NewTabButton_Click(object sender, EventArgs e)
+        {
+            tabControl.TabPages.Add(CreateNewTab());
         }
 
         public Main()
@@ -66,94 +122,31 @@ namespace LazyBrowser
             InitializeComponent();
             // Start the browser after initialize global component
             Initialize();
+            TabPage lastTab = tabControl.TabPages[tabControl.TabPages.Count - 1];
+            lastTab.Controls.Add(newTabButton);
+            newTabButton.Location = new Point(lastTab.Width - newTabButton.Width, 0);
         }
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        private void UpdateNewTabButtonPosition()
         {
-            Cef.Shutdown();
-        }
+            const int buttonMargin = 5;
 
-        private void reloadButton_Click(object sender, EventArgs e)
-        {
-            UpdateStates();
-            if (chromeBrowser.IsLoading)
+            // Calculate the total width of existing tabs
+            int totalTabsWidth = 0;
+            foreach (TabPage tabPage in tabControl.TabPages)
             {
-                chromeBrowser.Stop();
+                totalTabsWidth += tabPage.Width;
             }
-            else if (!chromeBrowser.IsLoading)
-            {
-                chromeBrowser.Reload();
-            }
-            UpdateStates();
+
+            // Calculate the horizontal position for the "New Tab" button
+            int buttonX = totalTabsWidth + buttonMargin;
+            int buttonY = 0;  // Y-coordinate for the top position
+
+            newTabButton.Location = new Point(buttonX, buttonY);
         }
 
-        private void forwardButton_Click(object sender, EventArgs e)
-        {
-            UpdateStates();
-            chromeBrowser.Forward();
-            UpdateStates();
-        }
 
-        private void backButton_Click(object sender, EventArgs e)
-        {
-            UpdateStates();
-            chromeBrowser.Back();
-            UpdateStates();
-        }
 
-        private void exButton_Click(object sender, EventArgs e)
-        {
-            ContextMenuStrip exMenu = new ContextMenuStrip();
-            ToolStripMenuItem settings = new ToolStripMenuItem();
-            ToolStripMenuItem devtools = new ToolStripMenuItem();
-            ToolStripMenuItem about = new ToolStripMenuItem();
-            exMenu.SuspendLayout();
-            settings.Name = "settings";
-            settings.Size = new System.Drawing.Size(152, 22);
-            settings.Text = "Settings";
-            settings.Click += new System.EventHandler(this.settings_Click);
-            devtools.Name = "devtools";
-            devtools.Size = new System.Drawing.Size(152, 22);
-            devtools.Text = "Show DevTools";
-            devtools.Click += new System.EventHandler(this.devtools_Click);
-            about.Name = "about";
-            about.Size = new System.Drawing.Size(152, 22);
-            about.Text = "About";
-            about.Click += new System.EventHandler(this.about_Click);
-            exMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            settings,
-            devtools,
-            about});
-            exMenu.Name = "exMenu";
-            exMenu.Size = new System.Drawing.Size(153, 70);
-            exMenu.ResumeLayout(false);
-            exButton.ContextMenuStrip = exMenu;
-            exMenu.Show(exButton, new System.Drawing.Point(0, exButton.Height));
-        }
 
-        private void addressBar_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                chromeBrowser.LoadUrlAsync(addressBar.Text);
-            }
-        }
-        private void addressBar_Click(object sender, EventArgs e)
-        {
-            addressBar.SelectAll();
-        }
-        private void settings_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("coming soon");
-        }
 
-        private void devtools_Click(object sender, EventArgs e)
-        {
-            chromeBrowser.ShowDevTools();
-        }
-
-        private void about_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("coming soon");
-        }
     }
 }
