@@ -33,14 +33,13 @@ namespace LazyBrowser
             // Unhandled exceptions for the executing UI thread
             //Application.ThreadException += new ThreadExceptionEventHandler(CrashHandler);
             BrowserControl browser = new BrowserControl();
+            this.Controls.Add(browser);
         }
         public Main()
         {
             InitializeComponent();
             // Start the browser after initialize global component
             Initialize();
-            TabPage lastTab = tabControl.TabPages[tabControl.TabPages.Count - 1];
-            newTabButton.Location = new Point(lastTab.Width - newTabButton.Width, 0);
         }
 
 
