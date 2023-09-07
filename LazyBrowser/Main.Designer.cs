@@ -32,14 +32,6 @@ namespace LazyBrowser
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.SuspendLayout();
-            this.newTabButton = new System.Windows.Forms.Button();
-            this.newTabButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newTabButton.Location = new System.Drawing.Point(700, 10);
-            this.newTabButton.Name = "newTabButton";
-            this.newTabButton.Size = new System.Drawing.Size(75, 23);
-            this.newTabButton.Text = "New Tab";
-            this.newTabButton.UseVisualStyleBackColor = true;
-            this.newTabButton.Click += new System.EventHandler(this.NewTabButton_Click);
 
             //this.Controls.Add(this.newTabButton);
             // 
