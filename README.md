@@ -1,7 +1,12 @@
-# LazyBrowser Canary
+# LazyBrowser
 
-I can describe this in 3 words: Piece of shit
+An extremely garbage (and CEF-based) web browser
 
-Features are worked on in this branch, and then when they are done, we PR the changes into master
+# How to build
 
-Don't use builds from this branch if you value your sanity.
+You will need VS 2022 with the C# desktop app extensions
+
+1. Open the solution
+2. Select config Release (or Debug if you want to compile that)
+3. Build solution
+4. Profit!
