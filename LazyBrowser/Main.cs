@@ -66,6 +66,7 @@ namespace LazyBrowser
 
             Controls.Add(tabControl);
             tabControl.TabPages.Add(CreateNewTab());
+            tabControl.TabPages.Add(CreateNewTab());
         }
 
 
@@ -107,6 +108,12 @@ namespace LazyBrowser
             {
                 browsers[selectedIndex].Focus();
             }
+            if (tabControl.SelectedTab.Controls.ContainsKey("browser"))
+            {
+                BrowserControl selectedBrowser = (BrowserControl)tabControl.SelectedTab.Controls["browser"];
+                selectedBrowser.Focus();
+                this.Text = selectedBrowser.chromeBrowser.Text + " - LazyBrowser";
+            }
         }
         private void Main_Layout(object sender, LayoutEventArgs e)
         {
@@ -115,6 +122,12 @@ namespace LazyBrowser
         private void NewTabButton_Click(object sender, EventArgs e)
         {
             tabControl.TabPages.Add(CreateNewTab());
+            if (tabControl.SelectedTab.Controls.ContainsKey("browser"))
+            {
+                BrowserControl selectedBrowser = (BrowserControl)tabControl.SelectedTab.Controls["browser"];
+                selectedBrowser.Focus();
+                this.Text = selectedBrowser.chromeBrowser.Text + " - LazyBrowser";
+            }
         }
 
         public Main()
@@ -123,7 +136,6 @@ namespace LazyBrowser
             // Start the browser after initialize global component
             Initialize();
             TabPage lastTab = tabControl.TabPages[tabControl.TabPages.Count - 1];
-            lastTab.Controls.Add(newTabButton);
             newTabButton.Location = new Point(lastTab.Width - newTabButton.Width, 0);
         }
         private void UpdateNewTabButtonPosition()

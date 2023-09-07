@@ -42,7 +42,10 @@ namespace LazyBrowser
         public void Initialize()
         {
             // Initialize cef with the provided settings
-            Cef.Initialize(globals.settings);
+            if (Cef.IsInitialized != true)
+            {
+                Cef.Initialize(globals.settings);
+            }
             // Create a browser component
             chromeBrowser = new ChromiumWebBrowser("http://duckduckgo.com");
             // Add it to the form and fill it to the form window.
@@ -54,6 +57,12 @@ namespace LazyBrowser
             UpdateStates();
             chromeBrowser.AddressChanged += OnBrowserAddressChanged;
             chromeBrowser.LoadingStateChanged += OnLoadingStateChanged;
+            //chromeBrowser.PopupCreated += (sender, e) =>
+            //{
+                //var newBrowser = e.WebBrowser;
+                //e.Handled = true; // Prevent the popup from opening in a new window
+                //chromiumBrowser.GetBrowser().MainFrame.ExecuteJavaScriptAsync("window.open('" + newBrowser.Address + "', '_self')");
+            //};
         }
         private void OnBrowserAddressChanged(object sender, AddressChangedEventArgs e)
         {
