@@ -1,4 +1,4 @@
-﻿namespace LazyBrowser
+﻿namespace Libreduck
 {
     partial class BrowserControl
     {
@@ -82,7 +82,7 @@
             // 
             // addressBar
             // 
-            this.addressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.addressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.addressBar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.addressBar.Location = new System.Drawing.Point(87, 3);
@@ -116,8 +116,8 @@
             // 
             // exButton
             // 
-            this.exButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.exButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.exButton.Location = new System.Drawing.Point(771, 3);
             this.exButton.Name = "exButton";

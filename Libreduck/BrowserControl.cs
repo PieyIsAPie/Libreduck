@@ -1,6 +1,6 @@
 ﻿using CefSharp.WinForms;
 using CefSharp;
-using LazyBrowser.Extensions;
+using Libreduck.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LazyBrowser
+namespace Libreduck
 {
     public partial class BrowserControl : UserControl
     {

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace LazyBrowser
+namespace Libreduck
 {
     partial class Main
     {
@@ -31,17 +31,19 @@ namespace LazyBrowser
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            this.SuspendLayout();
             this.newTabButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // newTabButton
+            // 
             this.newTabButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.newTabButton.Location = new System.Drawing.Point(700, 10);
             this.newTabButton.Name = "newTabButton";
             this.newTabButton.Size = new System.Drawing.Size(75, 23);
+            this.newTabButton.TabIndex = 0;
             this.newTabButton.Text = "New Tab";
             this.newTabButton.UseVisualStyleBackColor = true;
             this.newTabButton.Click += new System.EventHandler(this.NewTabButton_Click);
-
-            //this.Controls.Add(this.newTabButton);
             // 
             // Main
             // 
@@ -50,7 +52,7 @@ namespace LazyBrowser
             this.ClientSize = new System.Drawing.Size(784, 411);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
-            this.Text = "LazyBrowser";
+            this.Text = "Libreduck";
             this.ResumeLayout(false);
 
         }

@@ -1,4 +1,4 @@
-﻿namespace LazyBrowser
+﻿namespace Libreduck
 {
     partial class Popup
     {

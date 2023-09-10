@@ -5,10 +5,10 @@ using System.Threading;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
-using LazyBrowser.Extensions;
+using Libreduck.Extensions;
 
 
-namespace LazyBrowser
+namespace Libreduck
 {
     public partial class Main : Form
     {

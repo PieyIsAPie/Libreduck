@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using System;
 
-namespace LazyBrowser.Extensions
+namespace Libreduck.Extensions
 {   
     public static class ControlExtension
     {

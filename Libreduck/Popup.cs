@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LazyBrowser
+namespace Libreduck
 {
     public partial class Popup : Form
     {

@@ -1,9 +1,9 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
 using System;
-using LazyBrowser;
+using Libreduck;
 
-namespace LazyBrowser.Handlers
+namespace Libreduck.Handlers
 {
     public class LifeSpanHandler : ILifeSpanHandler
     {

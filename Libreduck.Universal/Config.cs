@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LazyBrowser.Universal
+namespace Libreduck.Universal
 {
     public class Config
     {
