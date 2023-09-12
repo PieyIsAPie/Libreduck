@@ -34,17 +34,6 @@ namespace Libreduck
             this.newTabButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // newTabButton
-            // 
-            this.newTabButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.newTabButton.Location = new System.Drawing.Point(700, 10);
-            this.newTabButton.Name = "newTabButton";
-            this.newTabButton.Size = new System.Drawing.Size(75, 23);
-            this.newTabButton.TabIndex = 0;
-            this.newTabButton.Text = "New Tab";
-            this.newTabButton.UseVisualStyleBackColor = true;
-            this.newTabButton.Click += new System.EventHandler(this.NewTabButton_Click);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

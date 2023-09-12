@@ -77,7 +77,8 @@ namespace Libreduck
         }
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Cef.Shutdown();
+            chromeBrowser.CloseDevTools();
+            //Cef.Shutdown();
         }
 
         private void reloadButton_Click(object sender, EventArgs e)

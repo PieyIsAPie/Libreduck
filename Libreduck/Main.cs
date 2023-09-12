@@ -22,7 +22,15 @@ namespace Libreduck
 
         private void CrashHandler(object sender, EventArgs e)
         {
-            Cef.Shutdown();
+            if (Cef.IsInitialized)
+            {
+                foreach (var browser in browsers)
+                {
+                    browser.chromeBrowser.CloseDevTools();
+                    browser.Dispose();
+                }
+                Cef.Shutdown();
+            }
         }
         public void Initialize()
         {
@@ -30,10 +38,9 @@ namespace Libreduck
 
 
             // Unhandled exceptions for our Application Domain
-            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CrashHandler);
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CrashHandler);
             // Unhandled exceptions for the executing UI thread
-            //Application.ThreadException += new ThreadExceptionEventHandler(CrashHandler);
-            this.Layout += Main_Layout;
+            Application.ThreadException += new ThreadExceptionEventHandler(CrashHandler);
             InitializeTabControl();
         }
         private void InitializeTabControl()
@@ -76,7 +83,7 @@ namespace Libreduck
         private void TabControl_MouseDown(object sender, MouseEventArgs e)
         {
             //Looping through the controls.
-            for (int i = 0; i < this.tabControl.TabPages.Count; i++)
+            for (int i = 0; i < this.tabControl.TabPages.Count - 1; i++)
             {
                 Rectangle r = tabControl.GetTabRect(i);
                 //Getting the position of the "x" mark.
@@ -101,6 +108,10 @@ namespace Libreduck
                 e.Cancel = true;
         }
 
+        private bool isLastTab(TabControl control, int index)
+        {
+            return (control.TabPages.Count - 1) == index;
+        }
         private void TabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
             TabControl tabControl = (TabControl)sender;
@@ -114,7 +125,14 @@ namespace Libreduck
             float y = e.Bounds.Top + (e.Bounds.Height - textSize.Height) / 2;
 
             e.Graphics.DrawString(tabPage.Text, e.Font, Brushes.Black, x, y);
-            e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+            
+            if (!isLastTab(tabControl, e.Index))
+            {
+                Rectangle r = tabControl.GetTabRect(e.Index);
+                //Getting the position of the "x" mark.
+                Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
+                e.Graphics.DrawString("x", e.Font, Brushes.Black, closeButton);
+            }
             //e.Graphics.DrawString(this.tabControl.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
             e.DrawFocusRectangle();
         }
@@ -127,9 +145,6 @@ namespace Libreduck
             browser.Dock = DockStyle.Fill;
             browsers.Add(browser);
             nextTabIndex++;
-
-            // Update the position of the "New Tab" button whenever a new tab is created
-            UpdateNewTabButtonPosition();
 
             return tabPage;
         }
@@ -148,45 +163,12 @@ namespace Libreduck
             //    this.Text = selectedBrowser.chromeBrowser.Text + " - LazyBrowser";
             //}
         }
-        private void Main_Layout(object sender, LayoutEventArgs e)
-        {
-            UpdateNewTabButtonPosition();
-        }
-        private void NewTabButton_Click(object sender, EventArgs e)
-        {
-            tabControl.TabPages.Add(CreateNewTab());
-            if (tabControl.SelectedTab.Controls.ContainsKey("browser"))
-            {
-                BrowserControl selectedBrowser = (BrowserControl)tabControl.SelectedTab.Controls["browser"];
-                selectedBrowser.Focus();
-                this.Text = selectedBrowser.chromeBrowser.Text + " - LazyBrowser";
-            }
-        }
 
         public Main()
         {
             InitializeComponent();
             // Start the browser after initialize global component
             Initialize();
-            TabPage lastTab = tabControl.TabPages[tabControl.TabPages.Count - 1];
-            newTabButton.Location = new Point(lastTab.Width - newTabButton.Width, 0);
-        }
-        private void UpdateNewTabButtonPosition()
-        {
-            const int buttonMargin = 5;
-
-            // Calculate the total width of existing tabs
-            int totalTabsWidth = 0;
-            foreach (TabPage tabPage in tabControl.TabPages)
-            {
-                totalTabsWidth += tabPage.Width;
-            }
-
-            // Calculate the horizontal position for the "New Tab" button
-            int buttonX = totalTabsWidth + buttonMargin;
-            int buttonY = 0;  // Y-coordinate for the top position
-
-            newTabButton.Location = new Point(buttonX, buttonY);
         }
 
         [DllImport("user32.dll")]
