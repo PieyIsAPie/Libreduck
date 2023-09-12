@@ -17,7 +17,7 @@ namespace Libreduck.Handlers
             //stop open popup
             Popup popup = new Popup(targetUrl);
             popup.Show();
-            newBrowser = null;
+            newBrowser = popup.chromeBrowser;
             return true;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using CefSharp;
@@ -44,9 +45,12 @@ namespace Libreduck
             tabControl.DrawMode = TabDrawMode.OwnerDrawFixed; // Enable custom-drawn tabs
             tabControl.SizeMode = TabSizeMode.Fixed; // Set the TabSizeMode to Fixed
             tabControl.Alignment = TabAlignment.Top;
+            TabPage tabPage = new TabPage($"+");
 
             // Attach the event handler for drawing the tabs
             tabControl.DrawItem += TabControl_DrawItem;
+            tabControl.MouseDown += TabControl_MouseDown;
+            tabControl.Selecting += TabControl_Selecting;
 
             // Create a Panel to hold the "New Tab" button
             //Panel buttonPanel = new Panel();
@@ -66,9 +70,36 @@ namespace Libreduck
 
             Controls.Add(tabControl);
             tabControl.TabPages.Add(CreateNewTab());
-            tabControl.TabPages.Add(CreateNewTab());
+            tabControl.TabPages.Add(tabPage);
         }
 
+        private void TabControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            //Looping through the controls.
+            for (int i = 0; i < this.tabControl.TabPages.Count; i++)
+            {
+                Rectangle r = tabControl.GetTabRect(i);
+                //Getting the position of the "x" mark.
+                Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
+                if (closeButton.Contains(e.Location))
+                {
+                        this.tabControl.TabPages.RemoveAt(i);
+                        break;
+                }
+            }
+            var lastIndex = this.tabControl.TabCount - 1;
+            if (this.tabControl.GetTabRect(lastIndex).Contains(e.Location))
+            {
+                this.tabControl.TabPages.Insert(lastIndex, CreateNewTab());
+                this.tabControl.SelectedIndex = lastIndex;
+            }
+        }
+
+        private void TabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPageIndex == this.tabControl.TabCount - 1)
+                e.Cancel = true;
+        }
 
         private void TabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
@@ -83,6 +114,8 @@ namespace Libreduck
             float y = e.Bounds.Top + (e.Bounds.Height - textSize.Height) / 2;
 
             e.Graphics.DrawString(tabPage.Text, e.Font, Brushes.Black, x, y);
+            e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+            //e.Graphics.DrawString(this.tabControl.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
             e.DrawFocusRectangle();
         }
 
@@ -108,12 +141,12 @@ namespace Libreduck
             {
                 browsers[selectedIndex].Focus();
             }
-            if (tabControl.SelectedTab.Controls.ContainsKey("browser"))
-            {
-                BrowserControl selectedBrowser = (BrowserControl)tabControl.SelectedTab.Controls["browser"];
-                selectedBrowser.Focus();
-                this.Text = selectedBrowser.chromeBrowser.Text + " - LazyBrowser";
-            }
+            //if (tabControl.SelectedTab.Controls.ContainsKey("browser"))
+            //{
+            //    BrowserControl selectedBrowser = (BrowserControl)tabControl.SelectedTab.Controls["browser"];
+            //    selectedBrowser.Focus();
+            //    this.Text = selectedBrowser.chromeBrowser.Text + " - LazyBrowser";
+            //}
         }
         private void Main_Layout(object sender, LayoutEventArgs e)
         {
@@ -156,9 +189,13 @@ namespace Libreduck
             newTabButton.Location = new Point(buttonX, buttonY);
         }
 
-
-
-
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+        private const int TCM_SETMINTABWIDTH = 0x1300 + 49;
+        private void tabControl1_HandleCreated(object sender, EventArgs e)
+        {
+            SendMessage(this.tabControl.Handle, TCM_SETMINTABWIDTH, IntPtr.Zero, (IntPtr)16);
+        }
 
     }
 }
