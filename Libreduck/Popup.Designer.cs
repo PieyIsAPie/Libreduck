@@ -62,7 +62,7 @@
             // 
             // button1
             // 
-            this.button1.BackgroundImage = global::LazyBrowser.Properties.Resources.InformationButton;
+            this.button1.BackgroundImage = Libreduck.Properties.Resources.InformationButton;
             this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button1.Dock = System.Windows.Forms.DockStyle.Left;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Windows.Forms;
+﻿using System.Runtime.InteropServices;
 using CefSharp;
-using CefSharp.WinForms;
-using Libreduck.Extensions;
 
 
 namespace Libreduck
@@ -58,6 +51,7 @@ namespace Libreduck
             tabControl.DrawItem += TabControl_DrawItem;
             tabControl.MouseDown += TabControl_MouseDown;
             tabControl.Selecting += TabControl_Selecting;
+            //tabControl.HandleCreated += tabControl1_HandleCreated;
 
             // Create a Panel to hold the "New Tab" button
             //Panel buttonPanel = new Panel();
@@ -171,13 +165,13 @@ namespace Libreduck
             Initialize();
         }
 
-        [DllImport("user32.dll")]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
-        private const int TCM_SETMINTABWIDTH = 0x1300 + 49;
-        private void tabControl1_HandleCreated(object sender, EventArgs e)
-        {
-            SendMessage(this.tabControl.Handle, TCM_SETMINTABWIDTH, IntPtr.Zero, (IntPtr)16);
-        }
+        //[DllImport("user32.dll")]
+        //private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
+        //private const int TCM_SETMINTABWIDTH = 0x1300 + 49;
+        //private void tabControl1_HandleCreated(object sender, EventArgs e)
+        //{
+        //    SendMessage(this.tabControl.Handle, TCM_SETMINTABWIDTH, IntPtr.Zero, (IntPtr)16);
+        //}
 
     }
 }

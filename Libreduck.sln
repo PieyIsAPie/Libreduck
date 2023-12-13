@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.33530.505
+VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libreduck", "Libreduck\Libreduck.csproj", "{D705505F-EE47-475C-86F4-52B84EF61707}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libreduck.Universal", "Libreduck.Universal\Libreduck.Universal.csproj", "{A4AFA068-559A-44E8-8C42-5DC88DE7DF0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libreduck", "Libreduck\Libreduck.csproj", "{FF0BA2FD-191B-4102-9DAA-559E9262F6D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D705505F-EE47-475C-86F4-52B84EF61707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D705505F-EE47-475C-86F4-52B84EF61707}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D705505F-EE47-475C-86F4-52B84EF61707}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D705505F-EE47-475C-86F4-52B84EF61707}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4AFA068-559A-44E8-8C42-5DC88DE7DF0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4AFA068-559A-44E8-8C42-5DC88DE7DF0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4AFA068-559A-44E8-8C42-5DC88DE7DF0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4AFA068-559A-44E8-8C42-5DC88DE7DF0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0BA2FD-191B-4102-9DAA-559E9262F6D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0BA2FD-191B-4102-9DAA-559E9262F6D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0BA2FD-191B-4102-9DAA-559E9262F6D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0BA2FD-191B-4102-9DAA-559E9262F6D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {449FFE28-4B12-4FE7-BB21-1752B22EE199}
+		SolutionGuid = {3D9442BD-C426-4751-8E96-22D5DD84C56F}
 	EndGlobalSection
 EndGlobal

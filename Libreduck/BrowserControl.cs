@@ -1,17 +1,6 @@
 ﻿using CefSharp.WinForms;
 using CefSharp;
 using Libreduck.Extensions;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace Libreduck
 {
     public partial class BrowserControl : UserControl
@@ -19,7 +8,7 @@ namespace Libreduck
         public ChromiumWebBrowser chromeBrowser;
         public bool isIncognito;
         public string[] arguments = Environment.GetCommandLineArgs();
-        private ContextMenu exMenu = new ContextMenu();
+        private ContextMenuStrip exMenu = new ContextMenuStrip();
         public Global globals = new Global();
 
         private void UpdateStates()
@@ -28,11 +17,11 @@ namespace Libreduck
             forwardButton.Enabled = chromeBrowser.CanGoForward;
             if (chromeBrowser.IsLoading)
             {
-                reloadButton.Image = global::LazyBrowser.Properties.Resources.CloseTab;
+                reloadButton.Image = Libreduck.Properties.Resources.CloseTab;
             }
             else if (!chromeBrowser.IsLoading)
             {
-                reloadButton.Image = global::LazyBrowser.Properties.Resources.Reload;
+                reloadButton.Image = Libreduck.Properties.Resources.Reload;
             }
         }
         private void OnLoadingStateChanged(object sender, LoadingStateChangedEventArgs args)
@@ -78,6 +67,9 @@ namespace Libreduck
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             chromeBrowser.CloseDevTools();
+            chromeBrowser.Stop();
+            chromeBrowser.Hide();
+            chromeBrowser.Dispose();
             //Cef.Shutdown();
         }
 

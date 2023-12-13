@@ -50,7 +50,8 @@
             // forwardButton
             // 
             this.forwardButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.forwardButton.Image = global::LazyBrowser.Properties.Resources.RightArrow;
+            Bitmap rightArrow = Libreduck.Properties.Resources.RightArrow;
+            this.forwardButton.Image = rightArrow;
             this.forwardButton.Location = new System.Drawing.Point(31, 3);
             this.forwardButton.Name = "forwardButton";
             this.forwardButton.Size = new System.Drawing.Size(22, 23);
@@ -61,7 +62,7 @@
             // reloadButton
             // 
             this.reloadButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reloadButton.Image = global::LazyBrowser.Properties.Resources.Reload;
+            this.reloadButton.Image = Libreduck.Properties.Resources.Reload;
             this.reloadButton.Location = new System.Drawing.Point(59, 3);
             this.reloadButton.Name = "reloadButton";
             this.reloadButton.Size = new System.Drawing.Size(22, 23);
@@ -72,7 +73,7 @@
             // backButton
             // 
             this.backButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backButton.Image = global::LazyBrowser.Properties.Resources.LeftArrow;
+            this.backButton.Image = Libreduck.Properties.Resources.LeftArrow;
             this.backButton.Location = new System.Drawing.Point(3, 3);
             this.backButton.Name = "backButton";
             this.backButton.Size = new System.Drawing.Size(22, 23);
