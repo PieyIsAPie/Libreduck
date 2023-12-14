@@ -46,6 +46,8 @@ namespace Libreduck
             UpdateStates();
             chromeBrowser.AddressChanged += OnBrowserAddressChanged;
             chromeBrowser.LoadingStateChanged += OnLoadingStateChanged;
+            CefSettings cefSettings = new CefSettings();
+
             //chromeBrowser.PopupCreated += (sender, e) =>
             //{
                 //var newBrowser = e.WebBrowser;

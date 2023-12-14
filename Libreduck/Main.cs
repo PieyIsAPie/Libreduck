@@ -11,7 +11,6 @@ namespace Libreduck
         public Global globals = new Global();
         private List<BrowserControl> browsers;
         private TabControl tabControl;
-        private int nextTabIndex = 0;
 
         private void CrashHandler(object sender, EventArgs e)
         {
@@ -133,12 +132,12 @@ namespace Libreduck
 
         private TabPage CreateNewTab()
         {
-            TabPage tabPage = new TabPage($"Tab {nextTabIndex + 1}");
+            TabPage tabPage = new TabPage("New Tab");
             BrowserControl browser = new BrowserControl();
             tabPage.Controls.Add(browser);
             browser.Dock = DockStyle.Fill;
             browsers.Add(browser);
-            nextTabIndex++;
+            
 
             return tabPage;
         }
